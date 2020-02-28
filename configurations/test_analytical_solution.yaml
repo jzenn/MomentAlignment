@@ -1,0 +1,18 @@
+action:                                     test_analytical_solution                                  # the action performed
+content_images_path:                        ./../data/testset_content                                 # content images
+style_images_path:                          ./../data/testset_style                                   # style images
+image_saving_path:                          ./data/transfer_images                                    # path for the transfer images
+pretrained_model_path:                      ./models/moment_alignment_model_0_1_3_0                   # path to a pre-trained moment alignment model                      
+use_pretrained_model:                       False                                                     # whether to use a pretrained model
+encoder_model_path:                         ./models/encoder_1_25_6_state_dict.pth                    # path to a pre-trained encoder model
+decoder_model_path:                         ./models/decoder_1_25_6_state_dict.pth                    # path to a pre-trained decoder model
+loader:                                     no_norm                                                   # loader, one of (no_norm, std)
+unloader:                                   none                                                      # unloader, one of (std, saving, no_norm, none)
+imsize:                                     512                                                       # size to which the image is resized
+lr:                                         0.0001                                                    # the learning rate
+lambda_1:                                   0                                                         # lambda_1 of the loss function (reconstruction loss)
+lambda_2:                                   1                                                         # lambda_2 of the loss funciton (moment loss)
+moment_mode:                                3                                                         # the number of moment to be aligned
+feature_map_batch_size:                     8                                                         # the number of featuremaps in one batch
+url:                                        https://download.pytorch.org/models/vgg19-dcbb9e9d.pth    # the PyTorch URL to the VGG-19 network
+model_dir:                                  ./../data/torchvision_models/                             # the path to the VGG-19 model

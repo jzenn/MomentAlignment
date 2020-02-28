@@ -1,0 +1,32 @@
+action:                                     train                                                     # the action performed
+coco_data_path:                             ./../data/cocodataset/train2017                           # MS-COCO dataset
+coco_data_path_train:                       ./../data/cocodataset/train2017                           # MS-COCO train dataset
+coco_data_path_test:                        ./../data/cocodataset/train2017                           # MS-COCO test dataset
+coco_data_path_val:                         ./../data/cocodataset/train2017                           # MS-COCO validation dataset
+painter_by_numbers_data_path:               ./../data/painter-by-numbers/train                        # painer-by-numbers dataset
+painter_by_numbers_data_path_train:         ./../data/painter-by-numbers/train                        # painer-by-numbers train dataset
+painter_by_numbers_data_path_test:          ./../data/painter-by-numbers/train                        # painer-by-numbers validation dataset
+painter_by_numbers_data_path_val:           ./../data/painter-by-numbers/train                        # painer-by-numbers test dataset
+model_saving_path:                          ./data/moment_alignment_models                            # path for saving the models
+image_saving_path:                          ./data/moment_alignment_images                            # path for saving the images
+pretrained_model_path:                      ./data/moment_alignment_models                            # path to a pre-trained moment alignment model                      
+use_pretrained_model:                       False                                                     # whether to use a pretrained model
+encoder_model_path:                         ./models/encoder_1_25_6_state_dict.pth                    # path to a pre-trained encoder model
+decoder_model_path:                         ./models/decoder_1_25_6_state_dict.pth                    # path to a pre-trained decoder model
+tensorboardX_path:                          ./data/moment_alignment_runs                              # tensorboardX path
+loader:                                     no_norm                                                   # loader, one of (no_norm, std)
+unloader:                                   none                                                      # unloader, one of (std, saving, no_norm, none)
+epochs:                                     100                                                       # number of epochs to train the model for
+epoch_saving_interval:                      1                                                         # every epoch_saving_interval (epochs) a model is saved 
+step_printing_interval:                     5000                                                      # every step_printing_interval (iterations) the loss is printed 
+image_saving_interval:                      200                                                       # every image_saving_interval (iterations) a set of images is saved
+validation_interval:                        50000                                                     # every validation_interval (iterations) the model is validated
+imsize:                                     512                                                       # size to which the image is resized
+lr:                                         0.0001                                                    # the learning rate
+lambda_1:                                   0                                                         # lambda_1 of the loss function (reconstruction loss)
+lambda_2:                                   1                                                         # lambda_2 of the loss funciton (moment loss)
+moment_mode:                                3                                                         # the number of moment to be aligned
+feature_map_batch_size:                     8                                                         # the number of featuremaps in one batch
+do_validation:                              False                                                     # whether to do a validation
+url:                                        https://download.pytorch.org/models/vgg19-dcbb9e9d.pth    # the PyTorch URL to the VGG-19 network
+model_dir:                                  ./../data/torchvision_models/                             # the path to the VGG-19 model
