@@ -1,3 +1,4 @@
+import os
 import torch
 
 import torchvision.transforms as transforms
@@ -10,6 +11,13 @@ import train
 import test
 import test_analytical_solution
 import test_multiple
+
+# path to python_utils
+sys.path.insert(0, '../utils')
+sys.path.insert(0, '/home/zenn')
+
+from python_utils.FolderStructure import FolderStructure
+from python_utils.UniqueName import UniqueName
 
 # the device used
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -26,6 +34,20 @@ def get_config(config):
 
 configuration = get_config(sys.argv[1])
 action = configuration['action']
+
+# generate folder structure
+configuration['folder_structure'] = FolderStructure(name='ma', working_directory='./experiments')
+configuration['folder_structure'].create_structure(['images', 'loss', 'model_checkpoints', 'runs'])
+
+configuration['image_saving_path'] = os.path.join(configuration['folder_structure'].get_parent_folder(), './images')
+configuration['model_saving_path'] = os.path.join(configuration['folder_structure'].get_parent_folder(),
+                                                  './model_checkpoints')
+configuration['tensorboardX_path'] = os.path.join(configuration['folder_structure'].get_parent_folder(), './runs')
+configuration['unique_name'] = UniqueName(name='nst_image', configuration=configuration).get_unique_identifier()
+
+with open(os.path.join(configuration['folder_structure'].get_parent_folder(), f'configuration.yaml'), 'w') as f:
+    yaml.dump(configuration, f, default_flow_style=False)
+
 print('the configuration used is:')
 pprint.pprint(configuration, indent=4)
 

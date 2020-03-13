@@ -1,3 +1,5 @@
+import os
+import sys
 import torch
 import torch.optim as optim
 import torchvision.utils as u
@@ -7,6 +9,12 @@ from tensorboardX import SummaryWriter
 import utils
 import data_loader
 import net
+
+# path to python_utils
+sys.path.insert(0, '../utils')
+sys.path.insert(0, '/home/zenn')
+
+from python_utils.LossWriter import LossWriter
 
 
 # device used
@@ -45,6 +53,9 @@ def train(configuration):
     tensorboardX_path = configuration['tensorboardX_path']
     writer = SummaryWriter(logdir='{}/runs'.format(tensorboardX_path))
     print('saving tensorboardX logs to {}'.format(tensorboardX_path))
+
+    loss_writer = LossWriter(os.path.join(configuration['folder_structure'].get_parent_folder(), './loss/loss'))
+    loss_writer.write_header(columns=['epoch', 'all_training_iteration', 'loss', 'moment_loss', 'reconstruction_loss'])
 
     # batch_size is the number of images to sample
     batch_size = 1
@@ -106,7 +117,6 @@ def train(configuration):
     print('got encoder')
     print(encoder)
 
-    # only optimize the decoder in the model (!)
     try:
         optimizer = optim.Adam(moment_alignment_model.parameters(), lr=configuration['lr'])
     except:
@@ -202,6 +212,9 @@ def train(configuration):
                                                                    style_feature_map_batch_moments,
                                                                    out,
                                                                    last_moment=loss_moment_mode)
+
+                loss_writer.write_row([epoch, all_training_iteration, loss.item(), moment_loss.item(),
+                                       reconstruction_loss.item()])
 
                 # backprop
                 loss.backward()

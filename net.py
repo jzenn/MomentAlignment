@@ -300,6 +300,60 @@ class MomentAlignment(nn.Module):
         return out.to(device)
 
 
+class MomentAlignmentResidualNetwork(nn.Module):
+    """
+    Moment Alignment module
+    """
+    def __init__(self, mode, in_channels):
+        super(MomentAlignmentResidualNetwork, self).__init__()
+        self.mode = mode
+
+        start_block = [
+            nn.Conv2d(in_channels, 32, 1, 1, 0),
+            nn.ReLU(),
+            nn.Conv2d(32, 16, 1, 1, 0),
+            nn.ReLU()
+        ]
+
+        residual_block = [
+            nn.Conv2d(16, 16, 1, 1, 0),
+            nn.ReLU(),
+            nn.Conv2d(16, 16, 1, 1, 0),
+            nn.ReLU()
+        ]
+
+        self.net = [nn.Sequential(*start_block)]
+
+        for _ in range(self.mode - 1):
+            self.net.append(nn.Sequential(*residual_block))
+
+        self.net.append(nn.Conv2d(16, 1, 1, 1, 0))
+
+        self.net = nn.ModuleList(self.net)
+
+    def forward(self, feature_map, feature_map_moments, new_moments, do_print=False):
+        # (n, c, h, w) content feature map size
+        n, c, h, w = feature_map.size()
+
+        # produce input to net
+        for i in range(self.mode):
+            target_moment_layer = new_moments[i].expand(n, c, h, w).to(device)
+            input_moment_layer = feature_map_moments[i].expand(n, c, h, w).to(device)
+            feature_map = torch.cat([feature_map, target_moment_layer, input_moment_layer], 1)
+
+        # start block
+        out = self.net[0](feature_map)
+
+        # residual blocks
+        for i in range(1, self.mode - 1):
+            out = self.net[i](out) + out
+
+        # end block
+        out = self.net[-1](out)
+
+        return out.to(device)
+
+
 class AdaptiveInstanceNormalization(nn.Module):
     """
     Adaptive Instance Normaliztion (AdaIN) aligns the std and mean of two tensors channel-wise
@@ -346,7 +400,11 @@ def get_moment_alignment_model(configuration, moment_mode, use_list=False, list_
     """
     use_pretrained_model = configuration['use_pretrained_model']
 
-    model = MomentAlignment(mode=moment_mode, in_channels=(2 * moment_mode + 1)).to(device)
+    if configuration['model'] == 'MomentAlignment':
+        model = MomentAlignment(mode=moment_mode, in_channels=(2 * moment_mode + 1)).to(device)
+    if configuration['model'] == 'MomentAlignmentResidualNetwork':
+        model = MomentAlignmentResidualNetwork(mode=moment_mode, in_channels=(2 * moment_mode + 1)).to(device)
+
     if use_list:
         model_path = configuration['model_path_list'][list_index]
     else:
