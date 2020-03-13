@@ -4,12 +4,11 @@ import torch
 import torch.optim as optim
 import torchvision.utils as u
 
+# from tensorboardX import SummaryWriter
+
 import utils
 import data_loader
 import net
-
-from tensorboardX import SummaryWriter
-
 
 # path to python_utils
 sys.path.insert(0, '../utils')
@@ -51,12 +50,15 @@ def train(configuration):
     model_saving_path = configuration['model_saving_path']
     print('saving models to {}'.format(model_saving_path))
 
-    tensorboardX_path = configuration['tensorboardX_path']
-    writer = SummaryWriter(logdir='{}/runs'.format(tensorboardX_path))
-    print('saving tensorboardX logs to {}'.format(tensorboardX_path))
+    # tensorboardX_path = configuration['tensorboardX_path']
+    # writer = SummaryWriter(logdir='{}/runs'.format(tensorboardX_path))
+    # print('saving tensorboardX logs to {}'.format(tensorboardX_path))
 
     loss_writer = LossWriter(os.path.join(configuration['folder_structure'].get_parent_folder(), './loss/loss'))
     loss_writer.write_header(columns=['epoch', 'all_training_iteration', 'loss', 'moment_loss', 'reconstruction_loss'])
+
+    validation_loss_writer = LossWriter(os.path.join(configuration['folder_structure'].get_parent_folder(), './loss/loss'))
+    validation_loss_writer.write_header(columns=['validation_iteration', 'loss', 'moment_loss', 'reconstruction_loss'])
 
     # batch_size is the number of images to sample
     batch_size = 1
@@ -157,7 +159,7 @@ def train(configuration):
                     val_data_loader = iter(val_dataloader)
                     print('val data loader iterable')
                     validation_loss = validate(number_of_validation, criterion, encoder, moment_alignment_model,
-                                               val_data_loader, feature_map_batch_size, writer)
+                                               val_data_loader, feature_map_batch_size, validation_loss_writer)
                     number_of_validation += 1
                     if validation_loss < current_validation_loss:
                         utils.save_current_best_model(epoch, moment_alignment_model, configuration['model_saving_path'])
@@ -223,13 +225,13 @@ def train(configuration):
 
                 result_feature_maps = torch.cat([result_feature_maps, out.cpu().view(1, -1, 32, 32)], 1)
 
-                if do_print:
-                    print('loss: {:4f}'.format(loss.item()))
-
-                    writer.add_scalar('data/training_loss', loss.item(), all_training_iteration)
-                    writer.add_scalar('data/training_moment_loss', moment_loss.item(), all_training_iteration)
-                    writer.add_scalar('data/training_reconstruction_loss', reconstruction_loss.item(),
-                                      all_training_iteration)
+                # if do_print:
+                #     print('loss: {:4f}'.format(loss.item()))
+                #
+                #     writer.add_scalar('data/training_loss', loss.item(), all_training_iteration)
+                #     writer.add_scalar('data/training_moment_loss', moment_loss.item(), all_training_iteration)
+                #     writer.add_scalar('data/training_reconstruction_loss', reconstruction_loss.item(),
+                #                       all_training_iteration)
 
             result_feature_maps = result_feature_maps[:, 1:513, :, :]
             result_img = decoder(result_feature_maps.to(device))
@@ -316,14 +318,17 @@ def validate(number_of_validation, criterion, encoder,
 
                 total_validation_loss += loss
 
-                if iteration % 2000 == 0:
-                    print('validation loss: {:4f}'.format(loss.item()))
-                    writer.add_scalar('data/validation_loss', loss.item(),
-                                      number_of_validation * 100 * 512 + iteration)
-                    writer.add_scalar('data/validation_moment_loss', moment_loss.item(),
-                                      number_of_validation * 100 * 512 + iteration)
-                    writer.add_scalar('data/validation_reconstruction_loss', reconstruction_loss.item(),
-                                      number_of_validation * 100 * 512 + iteration)
+                writer.write_row([number_of_validation * 100 * 512, loss.item(), moment_loss.item(),
+                                       reconstruction_loss.item()])
+
+                # if iteration % 2000 == 0:
+                #     print('validation loss: {:4f}'.format(loss.item()))
+                #     writer.add_scalar('data/validation_loss', loss.item(),
+                #                       number_of_validation * 100 * 512 + iteration)
+                #     writer.add_scalar('data/validation_moment_loss', moment_loss.item(),
+                #                       number_of_validation * 100 * 512 + iteration)
+                #     writer.add_scalar('data/validation_reconstruction_loss', reconstruction_loss.item(),
+                #                       number_of_validation * 100 * 512 + iteration)
 
     writer.add_scalar('data/mean_validation_loss', total_validation_loss / iteration, number_of_validation)
 
