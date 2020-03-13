@@ -1,12 +1,12 @@
 action:                                     train                                                     # the action performed
-coco_data_path:                             ./../data/cocodataset/train2017                           # MS-COCO dataset
-coco_data_path_train:                       ./../data/cocodataset/train2017                           # MS-COCO train dataset
-coco_data_path_test:                        ./../data/cocodataset/train2017                           # MS-COCO test dataset
-coco_data_path_val:                         ./../data/cocodataset/train2017                           # MS-COCO validation dataset
-painter_by_numbers_data_path:               ./../data/painter-by-numbers/train                        # painer-by-numbers dataset
-painter_by_numbers_data_path_train:         ./../data/painter-by-numbers/train                        # painer-by-numbers train dataset
-painter_by_numbers_data_path_test:          ./../data/painter-by-numbers/train                        # painer-by-numbers validation dataset
-painter_by_numbers_data_path_val:           ./../data/painter-by-numbers/train                        # painer-by-numbers test dataset
+coco_data_path:                             ./../StyleTransfer_test_data/cocodataset/train2017        # MS-COCO dataset
+coco_data_path_train:                       ./../StyleTransfer_test_data/cocodataset/train2017        # MS-COCO train dataset
+coco_data_path_test:                        ./../StyleTransfer_test_data/cocodataset/train2017        # MS-COCO test dataset
+coco_data_path_val:                         ./../StyleTransfer_test_data/cocodataset/train2017        # MS-COCO validation dataset
+painter_by_numbers_data_path:               ./../StyleTransfer_test_data/painter-by-numbers/train     # painer-by-numbers dataset
+painter_by_numbers_data_path_train:         ./../StyleTransfer_test_data/painter-by-numbers/train     # painer-by-numbers train dataset
+painter_by_numbers_data_path_test:          ./../StyleTransfer_test_data/painter-by-numbers/train     # painer-by-numbers validation dataset
+painter_by_numbers_data_path_val:           ./../StyleTransfer_test_data/painter-by-numbers/train     # painer-by-numbers test dataset
 model_saving_path:                          ./data/moment_alignment_models                            # path for saving the models
 image_saving_path:                          ./data/moment_alignment_images                            # path for saving the images
 pretrained_model_path:                      ./data/moment_alignment_models                            # path to a pre-trained moment alignment model                      
@@ -30,3 +30,4 @@ feature_map_batch_size:                     8                                   
 do_validation:                              False                                                     # whether to do a validation
 url:                                        https://download.pytorch.org/models/vgg19-dcbb9e9d.pth    # the PyTorch URL to the VGG-19 network
 model_dir:                                  ./../data/torchvision_models/                             # the path to the VGG-19 model
+model:                                      MomentAlignmentResidualNetwork                            # the type of model to use
