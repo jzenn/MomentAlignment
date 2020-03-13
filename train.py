@@ -4,11 +4,12 @@ import torch
 import torch.optim as optim
 import torchvision.utils as u
 
-from tensorboardX import SummaryWriter
-
 import utils
 import data_loader
 import net
+
+from tensorboardX import SummaryWriter
+
 
 # path to python_utils
 sys.path.insert(0, '../utils')
