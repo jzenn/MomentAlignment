@@ -143,7 +143,7 @@ def save_current_model(lambda_1, lambda_2, model_state_dict, optimizer_state_dic
     torch.save({
             'model_state_dict': model_state_dict,
             'optimizer_state_dict': optimizer_state_dict,
-            }, '{}/moment_alignment_model__{}_{}__{}'.format(model_saving_path, lambda_1, lambda_2,
+            }, '{}/moment_alignment_model__{}_{}__{}.pt'.format(model_saving_path, lambda_1, lambda_2,
                                                              datetime.datetime.now(pytz.utc).astimezone(
                                                                  pytz.timezone('Europe/Berlin')).strftime(fmt)))
 
@@ -161,7 +161,7 @@ def save_current_best_model(epoch, model, model_saving_path):
     except:
         model_state_dict = model.state_dict()
 
-    torch.save(model_state_dict, '{}/moment_alignment_model__{}'.format(model_saving_path, epoch))
+    torch.save(model_state_dict, '{}/moment_alignment_model__{}.pt'.format(model_saving_path, epoch))
 
 
 def get_latest_model(configuration):
