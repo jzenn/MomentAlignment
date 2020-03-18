@@ -20,6 +20,8 @@ model: MomentAlignmentResidualNetwork
 model_dir: /home/zenn/StyleTransfer_test_data/torchvision_models
 model_saving_path: /home/zenn/MomentAlignment/experiments
 moment_mode: 4
+name: "feature_map_batch_size: 4\t lr: 0.0001\t model: MomentAlignmentResidualNetwork\t\
+  \ moment_mode: 4\t"
 painter_by_numbers_data_path: /home/zenn/data/painter-by-numbers/train
 painter_by_numbers_data_path_test: /home/zenn/data/painter-by-numbers/test
 painter_by_numbers_data_path_train: /home/zenn/data/painter-by-numbers/train
