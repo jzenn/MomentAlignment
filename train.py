@@ -216,8 +216,9 @@ def train(configuration):
                                                                    out,
                                                                    last_moment=loss_moment_mode)
 
-                loss_writer.write_row([epoch, all_training_iteration, loss.item(), moment_loss.item(),
-                                       reconstruction_loss.item()])
+                if do_print:
+                    loss_writer.write_row([epoch, all_training_iteration, loss.item(), moment_loss.item(),
+                                           reconstruction_loss.item()])
 
                 # backprop
                 loss.backward()
