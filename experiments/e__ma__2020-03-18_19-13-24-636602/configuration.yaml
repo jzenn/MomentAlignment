@@ -1,0 +1,46 @@
+action: train
+coco_data_path: /home/zenn/data/cocodataset/train
+coco_data_path_test: /home/zenn/data/cocodataset/test
+coco_data_path_train: /home/zenn/data/cocodataset/train
+coco_data_path_val: /home/zenn/data/cocodataset/val
+decoder_model_path: /home/zenn/MomentAlignment/models/decoder_1_25_6_state_dict.pth
+do_validation: false
+encoder_model_path: /home/zenn/MomentAlignment/models/encoder_1_25_6_state_dict.pth
+epoch_saving_interval: 1
+epochs: 100
+feature_map_batch_size: 8
+folder_structure: !!python/object:python_utils.FolderStructure.FolderStructure
+  name: !!python/object:python_utils.UniqueName.UniqueName
+    configuration: {}
+    ending: ''
+    name: e__ma
+    timestamp: 2020-03-18_19-13-24-636602
+  prefix: e
+  working_directory: /mnt/beegfs/home/zenn/MomentAlignment/experiments/e__ma__2020-03-18_19-13-24-636602
+image_saving_interval: 200
+image_saving_path: /mnt/beegfs/home/zenn/MomentAlignment/experiments/e__ma__2020-03-18_19-13-24-636602/./images
+imsize: 512
+lambda_1: 0
+lambda_2: 1
+loader: no_norm
+lr: 0.0005
+model: MomentAlignment
+model_dir: /home/zenn/StyleTransfer_test_data/torchvision_models
+model_saving_path: /mnt/beegfs/home/zenn/MomentAlignment/experiments/e__ma__2020-03-18_19-13-24-636602/./model_checkpoints
+moment_mode: 4
+name: "feature_map_batch_size: 8\t lr: 0.0005\t model: MomentAlignment\t moment_mode:\
+  \ 4\t"
+painter_by_numbers_data_path: /home/zenn/data/painter-by-numbers/train
+painter_by_numbers_data_path_test: /home/zenn/data/painter-by-numbers/test
+painter_by_numbers_data_path_train: /home/zenn/data/painter-by-numbers/train
+painter_by_numbers_data_path_val: /home/zenn/data/painter-by-numbers/val
+pretrained_model_path: /home/zenn/MomentAlignment/experiments
+step_printing_interval: 5000
+tensorboardX_path: /mnt/beegfs/home/zenn/MomentAlignment/experiments/e__ma__2020-03-18_19-13-24-636602/./runs
+unique_name: "nst_image__action-train__coco_data_path-/home/zenn/data/cocodataset/train__coco_data_path_test-/home/zenn/data/cocodataset/test__coco_data_path_train-/home/zenn/data/cocodataset/train__coco_data_path_val-/home/zenn/data/cocodataset/val__decoder_model_path-/home/zenn/MomentAlignment/models/decoder_1_25_6_state_dict.pth__do_validation-False__encoder_model_path-/home/zenn/MomentAlignment/models/encoder_1_25_6_state_dict.pth__epoch_saving_interval-1__epochs-100__feature_map_batch_size-8__folder_structure-<python_utils.FolderStructure.FolderStructure\
+  \ object at 0x7fa9ffadb400>__image_saving_interval-200__image_saving_path-/mnt/beegfs/home/zenn/MomentAlignment/experiments/e__ma__2020-03-18_19-13-24-636602/./images__imsize-512__lambda_1-0__lambda_2-1__loader-no_norm__lr-0.0005__model-MomentAlignment__model_dir-/home/zenn/StyleTransfer_test_data/torchvision_models__model_saving_path-/mnt/beegfs/home/zenn/MomentAlignment/experiments/e__ma__2020-03-18_19-13-24-636602/./model_checkpoints__moment_mode-4__name-feature_map_batch_size:\
+  \ 8\t lr: 0.0005\t model: MomentAlignment\t moment_mode: 4\t__painter_by_numbers_data_path-/home/zenn/data/painter-by-numbers/train__painter_by_numbers_data_path_test-/home/zenn/data/painter-by-numbers/test__painter_by_numbers_data_path_train-/home/zenn/data/painter-by-numbers/train__painter_by_numbers_data_path_val-/home/zenn/data/painter-by-numbers/val__pretrained_model_path-/home/zenn/MomentAlignment/experiments__step_printing_interval-5000__tensorboardX_path-/mnt/beegfs/home/zenn/MomentAlignment/experiments/e__ma__2020-03-18_19-13-24-636602/./runs__unloader-none__url-https://download.pytorch.org/models/vgg19-dcbb9e9d.pth__use_pretrained_model-False__validation_interval-50000__2020-03-18_19-13-24-645222"
+unloader: none
+url: https://download.pytorch.org/models/vgg19-dcbb9e9d.pth
+use_pretrained_model: false
+validation_interval: 50000
