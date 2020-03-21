@@ -260,6 +260,73 @@ def get_trained_decoder(configuration):
     return decoder.to(device)
 
 
+class MomentAlignmentInceptionModule(nn.Module):
+    """
+    Moment Alignment Inception Module
+    """
+    def __init__(self, in_channels, out_channels):
+        super(MomentAlignmentInceptionModule, self).__init__()
+
+        self.relu = nn.ReLU()
+
+        self.conv_1 = nn.Conv2d(in_channels, out_channels, 1, 1, 0)
+        self.conv_2 = nn.Conv2d(in_channels, out_channels, 3, 1, 1)
+        self.conv_3 = nn.Conv2d(in_channels, out_channels, 5, 1, 2)
+
+        self.conv_4 = nn.Conv2d(out_channels * 3, out_channels, 1, 1, 0)
+
+    def forward(self, input):
+        out_1 = self.conv_1(input)
+        out_1 = self.relu(out_1)
+
+        out_2 = self.conv_2(input)
+        out_2 = self.relu(out_2)
+
+        out_3 = self.conv_3(input)
+        out_3 = self.relu(out_3)
+
+        return self.relu(self.conv_4(torch.cat([out_1, out_2, out_3], 1)))
+
+
+class MomentAlignmentInceptionNetwork(nn.Module):
+    """
+    Moment Alignment Inception Network
+    """
+    def __init__(self, mode, in_channels):
+        super(MomentAlignmentInceptionNetwork, self).__init__()
+        self.mode = mode
+
+        start_block = MomentAlignmentInceptionModule(in_channels=in_channels, out_channels=32)
+        second_block = MomentAlignmentInceptionModule(in_channels=32, out_channels=16)
+        inception_block = MomentAlignmentInceptionModule(in_channels=16, out_channels=16)
+        end_block = MomentAlignmentInceptionModule(in_channels=16, out_channels=1)
+
+        self.net = [start_block, second_block]
+
+        for _ in range(self.mode - 2):
+            self.net.append(inception_block)
+
+        self.net.append(end_block)
+
+        self.net = nn.ModuleList(self.net)
+
+    def forward(self, feature_map, feature_map_moments, new_moments, do_print=False):
+        # (n, c, h, w) content feature map size
+        n, c, h, w = feature_map.size()
+
+        # produce input to net
+        for i in range(self.mode):
+            target_moment_layer = new_moments[i].expand(n, c, h, w).to(device)
+            input_moment_layer = feature_map_moments[i].expand(n, c, h, w).to(device)
+            feature_map = torch.cat([feature_map, target_moment_layer, input_moment_layer], 1)
+
+        # forward pass through inception blocks
+        for i in range(self.mode):
+            feature_map = self.net[i](feature_map)
+
+        return feature_map.to(device)
+
+
 class MomentAlignment(nn.Module):
     """
     Moment Alignment module
@@ -404,6 +471,8 @@ def get_moment_alignment_model(configuration, moment_mode, use_list=False, list_
         model = MomentAlignment(mode=moment_mode, in_channels=(2 * moment_mode + 1)).to(device)
     if configuration['model'] == 'MomentAlignmentResidualNetwork':
         model = MomentAlignmentResidualNetwork(mode=moment_mode, in_channels=(2 * moment_mode + 1)).to(device)
+    if configuration['model'] == 'MomentAlignmentInceptionNetwork':
+        model = MomentAlignmentInceptionNetwork(mode=moment_mode, in_channels=(2 * moment_mode + 1)).to(device)
 
     if use_list:
         model_path = configuration['model_path_list'][list_index]
