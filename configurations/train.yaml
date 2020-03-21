@@ -30,4 +30,4 @@ feature_map_batch_size:                     8                                   
 do_validation:                              False                                                     # whether to do a validation
 url:                                        https://download.pytorch.org/models/vgg19-dcbb9e9d.pth    # the PyTorch URL to the VGG-19 network
 model_dir:                                  ./../data/torchvision_models/                             # the path to the VGG-19 model
-model:                                      MomentAlignmentResidualNetwork                            # the type of model to use
+model:                                      MomentAlignmentInceptionNetwork                           # the type of model to use
