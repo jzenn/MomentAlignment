@@ -54,7 +54,7 @@ def train(configuration):
     # writer = SummaryWriter(logdir='{}/runs'.format(tensorboardX_path))
     # print('saving tensorboardX logs to {}'.format(tensorboardX_path))
 
-    loss_writer = LossWriter(os.path.join(configuration['folder_structure'].get_parent_folder(), './loss/loss'))
+    loss_writer = LossWriter(os.path.join(configuration['folder_structure'].get_parent_folder(), './loss/loss'), buffer_size=100)
     loss_writer.write_header(columns=['epoch', 'all_training_iteration', 'loss', 'moment_loss', 'reconstruction_loss'])
 
     validation_loss_writer = LossWriter(os.path.join(configuration['folder_structure'].get_parent_folder(), './loss/loss'))
