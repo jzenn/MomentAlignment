@@ -104,7 +104,7 @@ if __name__ == '__main__':
         print('starting test loop for content and style images')
         test_analytical_solution.test(configuration)
     elif action == 'test_multiple':
-        print('starting test compare loop for moments 12 ... 5')
+        print('starting test compare loop for moments 1, 2 ... 5')
         test_multiple.test(configuration)
 
 
