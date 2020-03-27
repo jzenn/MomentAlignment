@@ -27,7 +27,7 @@ painter_by_numbers_data_path_test: /home/zenn/data/painter-by-numbers/test
 painter_by_numbers_data_path_train: /home/zenn/data/painter-by-numbers/train
 painter_by_numbers_data_path_val: /home/zenn/data/painter-by-numbers/val
 pretrained_model_path: /home/zenn/MomentAlignment/experiments
-step_printing_interval: 5000
+step_printing_interval: 500
 tensorboardX_path: /home/zenn/MomentAlignment/experiments/
 unloader: none
 url: https://download.pytorch.org/models/vgg19-dcbb9e9d.pth

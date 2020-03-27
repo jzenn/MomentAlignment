@@ -18,7 +18,7 @@ loader:                                     no_norm
 unloader:                                   none
 epochs:                                     100
 epoch_saving_interval:                      1
-step_printing_interval:                     5000
+step_printing_interval:                     500
 image_saving_interval:                      200
 validation_interval:                        50000
 imsize:                                     512
