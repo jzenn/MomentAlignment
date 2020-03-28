@@ -11,14 +11,20 @@ import data_loader
 import net
 
 # path to python_utils
-sys.path.insert(0, '../utils')
-sys.path.insert(0, '/home/zenn')
+sys.path.insert(0, '../utils/ml_utils_pkg')
+sys.path.insert(0, '/home/zenn/python_utils/ml_utils')
 
-from python_utils.LossWriter import LossWriter
+from ml_utils.writer.LossWriter import LossWriter
+from ml_utils.hyperparameter.Schedule import QuadraticSchedule
 
 
 # device used
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+
+def set_lr(optimizer, lr):
+    for param_group in optimizer.param_groups:
+        param_group['lr'] = lr
 
 
 def train(configuration):
@@ -125,6 +131,8 @@ def train(configuration):
     except:
         optimizer = optim.Adam(moment_alignment_model.module.parameters(), lr=configuration['lr'])
     print('got optimizer')
+    schedule = QuadraticSchedule(timesteps=10000000, initial=configuration['lr'], final=configuration['lr']/10.)
+    print('got schedule')
 
     print('making iterable from train dataloader')
     train_data_loader = iter(train_dataloader)
@@ -217,6 +225,7 @@ def train(configuration):
                                                                    last_moment=loss_moment_mode)
 
                 if do_print:
+                    set_lr(optimizer, lr=schedule.get(all_training_iteration / step_printing_interval))
                     loss_writer.write_row([epoch, all_training_iteration, loss.item(), moment_loss.item(),
                                            reconstruction_loss.item()])
 
