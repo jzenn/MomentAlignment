@@ -9,6 +9,7 @@ data/
 image*.jpeg
 model_checkpoints
 experiments
+web*
 
 # notebooks
 .ipynb*
