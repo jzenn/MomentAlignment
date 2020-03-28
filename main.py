@@ -13,11 +13,11 @@ import test_analytical_solution
 import test_multiple
 
 # path to python_utils
-sys.path.insert(0, '../utils')
-sys.path.insert(0, '/home/zenn')
+sys.path.insert(0, '../utils/ml_utils_pkg')
+sys.path.insert(0, '/home/zenn/python_utils/ml_utils')
 
-from python_utils.FolderStructure import FolderStructure
-from python_utils.UniqueName import UniqueName
+from ml_utils.utils.FolderStructure import FolderStructure
+from ml_utils.utils.UniqueName import UniqueName
 
 # the device used
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
