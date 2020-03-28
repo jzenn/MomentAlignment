@@ -12,7 +12,7 @@ import net
 
 # path to python_utils
 sys.path.insert(0, '../utils/ml_utils_pkg')
-sys.path.insert(0, '/home/zenn/python_utils/ml_utils')
+sys.path.insert(0, '/home/zenn/python_utils')
 
 from ml_utils.writer.LossWriter import LossWriter
 from ml_utils.hyperparameter.Schedule import QuadraticSchedule
