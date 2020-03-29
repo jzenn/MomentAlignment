@@ -14,8 +14,8 @@ import net
 sys.path.insert(0, '../utils/ml_utils_pkg')
 sys.path.insert(0, '/home/zenn/python_utils')
 
-from ml_utils.writer.LossWriter import LossWriter
-from ml_utils.hyperparameter.Schedule import QuadraticSchedule
+from ml_utils.writer import LossWriter
+from ml_utils.hyperparameter import QuadraticSchedule
 
 
 # device used
