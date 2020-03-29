@@ -1,12 +1,15 @@
 lr:
   - 0.0001
-  #- 0.00005
 moment_mode:
  - 4
  - 5
 feature_map_batch_size:
- - 8
+ - 16
 model:
- - MomentAlignment
- - MomentAlignmentResidualNetwork
  - MomentAlignmentInceptionNetwork
+lambda_1:
+ - 0.125
+ - 0.25
+ - 0.5
+ - 1
+ - 2

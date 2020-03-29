@@ -19,9 +19,9 @@ lr: 0.0001
 model: MomentAlignmentInceptionNetwork
 model_dir: /home/zenn/StyleTransfer_test_data/torchvision_models
 model_saving_path: /home/zenn/MomentAlignment/experiments
-moment_mode: 4
+moment_mode: 5
 name: "feature_map_batch_size: 16\t lambda_1: 1\t lr: 0.0001\t model: MomentAlignmentInceptionNetwork\t\
-  \ moment_mode: 4\t"
+  \ moment_mode: 5\t"
 painter_by_numbers_data_path: /home/zenn/data/painter-by-numbers/train
 painter_by_numbers_data_path_test: /home/zenn/data/painter-by-numbers/test
 painter_by_numbers_data_path_train: /home/zenn/data/painter-by-numbers/train

@@ -22,7 +22,6 @@ step_printing_interval:                     500
 image_saving_interval:                      200
 validation_interval:                        50000
 imsize:                                     512
-lambda_1:                                   0
 lambda_2:                                   1
 do_validation:                              False
 url:                                        https://download.pytorch.org/models/vgg19-dcbb9e9d.pth
