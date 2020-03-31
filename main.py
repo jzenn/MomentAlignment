@@ -16,8 +16,8 @@ import test_multiple
 sys.path.insert(0, '../utils/ml_utils_pkg')
 sys.path.insert(0, '/home/zenn/python_utils')
 
-from ml_utils.utils.FolderStructure import FolderStructure
-from ml_utils.utils.UniqueName import UniqueName
+from ml_utils.utils import FolderStructure
+from ml_utils.utils import UniqueName
 
 # the device used
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')

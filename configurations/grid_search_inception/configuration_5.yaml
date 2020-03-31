@@ -8,11 +8,11 @@ do_validation: false
 encoder_model_path: /home/zenn/MomentAlignment/models/encoder_1_25_6_state_dict.pth
 epoch_saving_interval: 1
 epochs: 100
-feature_map_batch_size: 8
+feature_map_batch_size: 16
 image_saving_interval: 200
 image_saving_path: /home/zenn/MomentAlignment/experiments
 imsize: 512
-lambda_1: 0
+lambda_1: 0.125
 lambda_2: 1
 loader: no_norm
 lr: 0.0001
@@ -20,7 +20,7 @@ model: MomentAlignmentInceptionNetwork
 model_dir: /home/zenn/StyleTransfer_test_data/torchvision_models
 model_saving_path: /home/zenn/MomentAlignment/experiments
 moment_mode: 5
-name: "feature_map_batch_size: 8\t lr: 0.0001\t model: MomentAlignmentInceptionNetwork\t\
+name: "feature_map_batch_size: 16\t lambda_1: 0.125\t lr: 0.0001\t model: MomentAlignmentInceptionNetwork\t\
   \ moment_mode: 5\t"
 painter_by_numbers_data_path: /home/zenn/data/painter-by-numbers/train
 painter_by_numbers_data_path_test: /home/zenn/data/painter-by-numbers/test
