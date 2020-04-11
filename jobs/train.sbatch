@@ -14,4 +14,4 @@
 MAIN="$HOME/MomentAlignment/main.py"
 CONFIGURATION="$1"
 
-singularity exec --nv /common/singularityImages/TCML-Cuda10_0Tensorflow2_0_0.simg python -u "$MAIN" "$CONFIGURATION"
+singularity exec --nv /common/singularityImages/TCML-Cuda10_1_TF2_1_0_PT1_4.simg python -u "$MAIN" "$CONFIGURATION"
