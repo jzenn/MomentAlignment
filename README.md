@@ -65,8 +65,4 @@ The final thesis can be found (here)[https://jzenn.github.io/projects/bsc-thesis
 
 ### References 
 
-[1] X. Huang and S. Belongie. Arbitrary style transfer in real-time with adaptive instance normalization. In International Conference on Computer Vision (ICCV), 2017.
-
-[2] A. Gretton, K. Borgwardt, M. Rasch, B. Schölkopf, and A. Smola. A kernel two-sample test. In J. Mach. Learn. Res., 2012.
-
-[3] L. Gatys, A. Ecker, and M. Bethge. Texture synthesis using convolutional neural networks. In Conference on Neural Information Processing Systems (NIPS), 2015. 
+[1] X. Huang and S. Belongie. Arbitrary style transfer in real-time with adaptive instance normalization. In International Conference on Computer Vision (ICCV), 2017. 
