@@ -10,6 +10,8 @@ image*.jpeg
 model_checkpoints
 experiments
 web*
+grid_search
+grid_search_inception
 
 # notebooks
 .ipynb*
