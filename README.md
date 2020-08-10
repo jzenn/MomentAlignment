@@ -1,7 +1,7 @@
 # Moment Alignment
 
 This project implements an extension to the Adaptive Instance Normalization module 
-from the approach that was proposed by Huang et al. in **(cite Huang et al.)**.
+from the approach that was proposed by Huang et al. in [1].
 The moment alignment module is able to not only adapt the first two statistical 
 moments of content feature maps and style feature maps but also to align up to 
 five statistical moments.
@@ -61,4 +61,12 @@ moment alignment network makes up two chapter of the final thesis. A slightly mo
 version of the chapter can be found in this repository as a pdf-file. Also, the chapter 
 introduces all related formulas to this work. 
 
-The final thesis can be found **(link here)** in a corrected and modified version. 
+The final thesis can be found (here)[https://jzenn.github.io/projects/bsc-thesis] in a corrected and modified version.
+
+### References 
+
+[1] X. Huang and S. Belongie. Arbitrary style transfer in real-time with adaptive instance normalization. In International Conference on Computer Vision (ICCV), 2017.
+
+[2] A. Gretton, K. Borgwardt, M. Rasch, B. Schölkopf, and A. Smola. A kernel two-sample test. In J. Mach. Learn. Res., 2012.
+
+[3] L. Gatys, A. Ecker, and M. Bethge. Texture synthesis using convolutional neural networks. In Conference on Neural Information Processing Systems (NIPS), 2015. 
