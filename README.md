@@ -61,7 +61,7 @@ moment alignment network makes up two chapter of the final thesis. A slightly mo
 version of the chapter can be found in this repository as a pdf-file. Also, the chapter 
 introduces all related formulas to this work. 
 
-The final thesis can be found (here)[https://jzenn.github.io/projects/bsc-thesis] in a corrected and modified version.
+The final thesis can be found [here](https://jzenn.github.io/projects/bsc-thesis) in a corrected and modified version.
 
 ### References 
 
